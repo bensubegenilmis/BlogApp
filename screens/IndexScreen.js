@@ -1,26 +1,29 @@
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, TouchableOpacity } from 'react-native';
 import React, { useContext } from 'react';
 import { Context } from '../context/BlogContext';
 import { EvilIcons } from '@expo/vector-icons';
 
 
-export default function IndexScreen() {
+export default function IndexScreen({navigation}) {
 
-    const { state, addBlogPost } = useContext(Context);
+    const { state, addBlogPost, deleteBlogPost } = useContext(Context);
     return (
         <View>
             {/*  <Text>IndexScreen </Text> */}
             <Button title='Ekle' onPress={addBlogPost} />
             <FlatList
                 data={state}
-                keyExtractor={blogPosts => blogPosts.title}
+                keyExtractor={blogPosts => blogPosts.id}
                 renderItem={({ item }) => {
                     return (
-                        <View style = {styles.row}>
-                            <Text style = {styles.title} >{item.title}</Text>
-                            <EvilIcons name="trash" size={28} color="black" />
-                            
-                        </View>
+                        <TouchableOpacity onPress={() => navigation.navigate('Show', {id:item.id})}>
+                            <View style={styles.row}>
+                                <Text style={styles.title} >{item.title}</Text>
+                                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                                    <EvilIcons name="trash" size={28} color="black" />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
                     );
 
                 }}
@@ -30,16 +33,16 @@ export default function IndexScreen() {
 }
 
 const styles = StyleSheet.create({
-    row:{
+    row: {
         flexDirection: 'row',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         borderTopWidth: 1,
         paddingHorizontal: 10,
         paddingVertical: 20,
         borderColor: 'gray',
 
     },
-    title:{
-        fontSize:18,
+    title: {
+        fontSize: 18,
     },
 });
