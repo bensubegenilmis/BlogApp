@@ -30,9 +30,9 @@ export default function App() {
               )
             })} />
             <Stack.Screen name="Create" component={CreateScreen} />
-            <Stack.Screen name="Show" component={ShowScreen} options={({navigation}) => ({
+            <Stack.Screen name="Show" component={ShowScreen} options={({navigation, route}) => ({
               headerRight: () => (
-                <TouchableOpacity onPress={()=> navigation.navigate('Edit')}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Edit' , {id: route.params.id})}>
                     <Feather name="edit" size={24} color="black" />
                 </TouchableOpacity>
               )
