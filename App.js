@@ -21,7 +21,7 @@ export default function App() {
 
         <StatusBar style='auto' />
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerTitle: 'Blog Uygulaması' }}>
+          <Stack.Navigator  screenOptions={{ headerTitle: 'Blog Uygulaması'}}>
             <Stack.Screen name="Index" component={IndexScreen} options={({navigation}) => ({
               headerRight: () => (
                 <TouchableOpacity onPress={()=> navigation.navigate('Create')}>

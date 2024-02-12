@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
     mainContainer:{
         alignItems:'center',
         marginTop:10,
+        
+        
 
     },
     container:{
